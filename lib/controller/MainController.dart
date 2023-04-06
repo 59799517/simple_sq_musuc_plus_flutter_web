@@ -20,10 +20,10 @@ class MainController  extends GetxController{
   String getSearchTypeUrl = "/set/getSearchType";
   String getSearchTypeBrTypeUrl = "/set/getSearchTypeBrType";
 
-  String searchUrl = "/searchMusic/searchType/searchValue/50/1";
-  String searchArtistUrl = "/searchArtist/searchType/searchValue/50/1";
+  String searchUrl = "/searchMusic/searchType/searchValue/10/1";
+  String searchArtistUrl = "/searchArtist/searchType/searchValue/10/1";
   String ArtistDownloadUrl = "/ArtistDownload";
-  String searchAlbumUrl = "/searchAlbum/searchType/searchValue/50/1";
+  String searchAlbumUrl = "/searchAlbum/searchType/searchValue/10/1";
   String AlbumDownloadUrl = "/AlbumDownload";
 
   String ArtistSongListUrl = "/ArtistSongList";

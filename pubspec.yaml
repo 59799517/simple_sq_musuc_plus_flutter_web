@@ -45,6 +45,8 @@ dependencies:
 #  get_storage: ^2.0.3
   http: ^0.13.5
   hawk_fab_menu: ^1.2.0
+  octo_image: ^1.0.2
+
 
 
 dev_dependencies:

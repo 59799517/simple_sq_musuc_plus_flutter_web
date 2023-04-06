@@ -448,27 +448,30 @@ class _IndexPageState extends State<IndexPage> {
   Widget _buildListItem(BuildContext context, int index) {
 
     if(0==typesname_child_valie){
-
       try {
         return Container(
-                child: FLListTile(
-                  isThreeLine: true,
-                  backgroundColor: Colors.transparent,
-                  leading: musicList.value[index]["pic"]!=null&&musicList.value[index]["pic"]!=""?CircleAvatar(
-                    backgroundImage: NetworkImage(musicList.value[index]["pic"]),
+                child: GFListTile(
+                  // isThreeLine: true,
+                  color: Colors.transparent,
+                  avatar: musicList.value[index]["pic"]!=null&&musicList.value[index]["pic"]!=""?GFImageOverlay(
+                    height: 100,
+                    width: 100,
+                    shape: BoxShape.circle,
+                    image:NetworkImage(musicList.value[index]["pic"]),
+                    boxFit: BoxFit.cover,
                   ):Container(),
                   title: Text(
                     musicList.value[index]["name"]!=null? musicList.value[index]["name"]:"无",
                     style: TextStyle(color: ColorAndStyle.textColor,fontSize: size!.height*0.028),
                   ),
-                  subtitle: Align(
+                  subTitle: Align(
                       child:  Text(
                         musicList.value[index]["artistName"]!=null? musicList.value[index]["artistName"]:"无",
                         style: ColorAndStyle.textStyle,
                       ),
                       alignment: FractionalOffset.topLeft
                   ),
-                  trailing: IconButton(icon: Icon(Icons.add,color: ColorAndStyle.textColor,),onPressed: () async{
+                  icon: IconButton(icon: Icon(Icons.add,color: ColorAndStyle.textColor,),onPressed: () async{
                     songDownloadToServer(musicList.value[index]["id"],musicList.value[index]["searchType"]);
                   },),
                 ),
@@ -503,12 +506,16 @@ class _IndexPageState extends State<IndexPage> {
 
 
     }else if(1==typesname_child_valie){
-      return SizedBox(
+      return Container(
         child: FLListTile(
           isThreeLine: true,
           backgroundColor: Colors.transparent,
-          leading: musicList.value[index]["pic"]!=null&&musicList.value[index]["pic"]!=""?CircleAvatar(
-            backgroundImage: NetworkImage(musicList.value[index]["pic"]),
+          leading: musicList.value[index]["pic"]!=null&&musicList.value[index]["pic"]!=""?GFImageOverlay(
+            height: 100,
+            width: 100,
+            shape: BoxShape.circle,
+            image:NetworkImage(musicList.value[index]["pic"]),
+            boxFit: BoxFit.cover,
           ):Container(),
           title: Text(
             musicList.value[index]["artistName"],
@@ -528,12 +535,16 @@ class _IndexPageState extends State<IndexPage> {
       );
 
     }else if(2==typesname_child_valie){
-      return SizedBox(
+      return Container(
         child: FLListTile(
           isThreeLine: true,
           backgroundColor: Colors.transparent,
-          leading: musicList.value[index]["pic"]!=null&&musicList.value[index]["pic"]!=""?CircleAvatar(
-            backgroundImage: NetworkImage(musicList.value[index]["pic"]),
+          leading: musicList.value[index]["pic"]!=null&&musicList.value[index]["pic"]!=""?GFImageOverlay(
+            height: 100,
+            width: 100,
+            shape: BoxShape.circle,
+            image:NetworkImage(musicList.value[index]["pic"]),
+            boxFit: BoxFit.cover,
           ):Container(),
           title: Text(
             musicList.value[index]["albumName"],
@@ -553,26 +564,31 @@ class _IndexPageState extends State<IndexPage> {
       );
 
     }else if(3==typesname_child_valie){
-      return SizedBox(
+      return Container(
         child: FLListTile(
           isThreeLine: true,
           backgroundColor: Colors.transparent,
-          leading: musicList.value[index]["pic"]!=null&&musicList.value[index]["pic"]!=""?CircleAvatar(
-            backgroundImage: NetworkImage(musicList.value[index]["pic"]),
+          leading: musicList.value[index]["pic"]!=null&&musicList.value[index]["pic"]!=""?GFImageOverlay(
+            height: 100,
+            width: 100,
+            shape: BoxShape.circle,
+            image:NetworkImage(musicList.value[index]["pic"]),
+            boxFit: BoxFit.cover,
           ):Container(),
           title: Text(
-            musicList.value[index]["albumName"],
+            musicList.value[index]["artistName"]
+           ,
             style: TextStyle(color: ColorAndStyle.textColor,fontSize: size!.height*0.028),
           ),
           subtitle: Align(
               child:  Text(
-                musicList.value[index]["artistName"],
+                "共计：${musicList.value[index]["total"]}首歌曲",
                 style: ColorAndStyle.textStyle,
               ),
               alignment: FractionalOffset.topLeft
           ),
           trailing: IconButton(icon: Icon(Icons.add,color: ColorAndStyle.textColor,),onPressed: () async{
-            AlbumDownloadToServer(musicList.value[index]["artistid"],musicList.value[index]["searchType"]);
+            ArtistALLDownloadToServer(musicList.value[index]["artistid"],musicList.value[index]["searchType"]);
           },),
         ),
       );
@@ -580,7 +596,7 @@ class _IndexPageState extends State<IndexPage> {
     }
 
     else{
-      return SizedBox();
+      return Container();
     }
 
 
@@ -633,6 +649,14 @@ class _IndexPageState extends State<IndexPage> {
       }
     });
   }
-
+void ArtistALLDownloadToServer(String id,String searchType){
+    controller.ArtistALLDownloadToServer(id,playListName,searchType).then((value) => {
+      if(value){
+        ToastUtils.showToast("添加成功")
+      }else{
+        ToastUtils.showToast("添加失败",textColor: Colors.amberAccent)
+      }
+    });
+}
 
 }
